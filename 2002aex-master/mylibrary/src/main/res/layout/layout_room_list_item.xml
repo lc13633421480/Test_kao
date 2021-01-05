@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_room_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="直播"
+            android:textColor="#111"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25sp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textColor="#111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="名    字："
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#111"
+                android:id="@+id/tv_room_list_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="小张直播"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textColor="#111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="直播号："
+                android:layout_marginTop="10dp"
+                android:textSize="15sp" />
+            <TextView
+                android:textColor="#111"
+                android:id="@+id/tv_room_list_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
