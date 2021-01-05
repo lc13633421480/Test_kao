@@ -34,7 +34,7 @@ public class PushActivity extends BaseActivity<IRoomList.Presenter> implements I
     private static String TAG = PushActivity.class.getSimpleName();
 
     private boolean mIsPrivateMode = false;
-    private boolean mIsPushing             = false;
+    private boolean mIsPushing  = false;
 
     ImageView imgBack;
     Button btnSwitch;
@@ -42,7 +42,7 @@ public class PushActivity extends BaseActivity<IRoomList.Presenter> implements I
     TXLivePusher mLivePusher;
     TXLivePushConfig mLivePushConfig;
 
-    private String mPusherURL       = "";   // 推流地址
+    private String mPusherURL ;   // 推流地址
 
     @Override
     protected int getLayout() {
@@ -71,7 +71,7 @@ public class PushActivity extends BaseActivity<IRoomList.Presenter> implements I
         map.put("roomid",id);
         //获流
         persenter.startLive(map);
-        initiPusher();
+
         initListener();
     }
 
@@ -94,12 +94,12 @@ public class PushActivity extends BaseActivity<IRoomList.Presenter> implements I
      * 推流
      */
     private void startPush(){
-        String push_url = SpUtils.getInstance().getString("push_url");
-        String tRTMPURL = push_url;
+//        String tRTMPURL = push_url;
+        Log.e("111", "startPush: "+mPusherURL );
         // 本地预览
         mLivePusher.startCameraPreview(mPusherView);
         // 发起推流
-        int ret = mLivePusher.startPusher(tRTMPURL.trim());
+        int ret = mLivePusher.startPusher(mPusherURL.trim());
         if(ret == -5){
             Log.i(TAG,"startRTMPPush:license校验失败");
         }
@@ -195,7 +195,8 @@ public class PushActivity extends BaseActivity<IRoomList.Presenter> implements I
     public void getResult(StartLiveBean startLiveBean) {
         StartLiveBean.DataBean data = startLiveBean.getData();
         String push_url = data.getPush_url();
-        SpUtils.getInstance().setValue("push_url",push_url);
+        mPusherURL = push_url;
+        initiPusher();
     }
 
     @Override

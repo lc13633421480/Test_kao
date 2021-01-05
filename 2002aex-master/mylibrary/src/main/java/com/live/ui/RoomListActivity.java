@@ -3,7 +3,9 @@ package com.live.ui;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +19,9 @@ import com.live.bean.StartLiveBean;
 import com.live.presenter.live.RoomListPresenter;
 import com.live.view.live.IRoomList;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RoomListActivity extends BaseActivity<IRoomList.Presenter> implements IRoomList.View {
 
@@ -58,17 +62,23 @@ public class RoomListActivity extends BaseActivity<IRoomList.Presenter> implemen
     @Override
     public void getRoomListResult(RoomListBean roomListBean) {
         List<RoomListBean.DataBean> data = roomListBean.getData();
-
-        mRlv.setLayoutManager(new LinearLayoutManager(this));
+        mRlv.setLayoutManager(new GridLayoutManager(this,2));
         RoomListAdapter roomListAdapter = new RoomListAdapter(this,data);
         mRlv.setAdapter(roomListAdapter);
 
+        //点击进入他人直播
         roomListAdapter.addListClick(new BaseAdapter.IListClick() {
             @Override
             public void itemClick(int pos) {
-                Intent intent = new Intent(RoomListActivity.this, LiveActivity.class);
-                intent.putExtra("id",data.get(pos).getId());
-                startActivity(intent);
+                int isopen = data.get(pos).getIsopen();
+                if(isopen == 1){  //开放的房间
+                    Intent intent = new Intent(RoomListActivity.this, LiveActivity.class);
+                    intent.putExtra("id",data.get(pos).getId());
+                    startActivity(intent);
+
+                }else if(isopen == 2){  //密码
+                    Toast.makeText(RoomListActivity.this, "不是公开的", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

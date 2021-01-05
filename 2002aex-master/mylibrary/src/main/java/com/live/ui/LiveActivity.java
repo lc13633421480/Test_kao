@@ -74,8 +74,7 @@ public class LiveActivity extends BaseActivity<IRoomList.Presenter> implements I
         Intent intent = getIntent();
         int id = intent.getIntExtra("id",0);
         persenter.roomLiveUrl(id);
-
-
+        Log.e("111", "initData: "+id );
     }
 
     private void initListener(){
@@ -91,7 +90,7 @@ public class LiveActivity extends BaseActivity<IRoomList.Presenter> implements I
     }
 
     private void startPlay(){
-
+        Log.e("111", "startPlay: "+111 );
         mLivePlayer.setPlayerView(mVideoView);
         mLivePlayer.setPlayListener(this);
         mLivePlayer.enableHardwareDecode(false);
@@ -172,13 +171,13 @@ public class LiveActivity extends BaseActivity<IRoomList.Presenter> implements I
     @Override
     public void getResult(LiveUrlBean liveUrlBean) {
         if(liveUrlBean.getErrno() == 0){
+            Log.e("111", "getResult: "+liveUrlBean );
             String play_url = liveUrlBean.getData().getPlay_url();
-//            SpUtils.getInstance().setValue("play_url",play_url);
             mPlayUrl = play_url;
-
+            Log.e(TAG, "getResult: "+mPlayUrl );
             startPlay();
-        }
 
+        }
     }
 
 
@@ -192,6 +191,4 @@ public class LiveActivity extends BaseActivity<IRoomList.Presenter> implements I
     public void getResult(StartLiveBean startLiveBean) {
 
     }
-
-
 }

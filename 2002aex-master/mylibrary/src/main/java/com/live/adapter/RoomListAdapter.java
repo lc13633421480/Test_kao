@@ -1,8 +1,10 @@
 package com.live.adapter;
 
 import android.content.Context;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.live.R;
 import com.live.base.BaseAdapter;
 import com.live.bean.RoomListBean;
@@ -10,9 +12,10 @@ import com.live.bean.RoomListBean;
 import java.util.List;
 
 public class RoomListAdapter extends BaseAdapter {
-
+    private Context context;
     public RoomListAdapter(Context context, List Data) {
         super(context, Data);
+        this.context = context;
     }
 
     @Override
@@ -25,9 +28,9 @@ public class RoomListAdapter extends BaseAdapter {
         RoomListBean.DataBean bean = (RoomListBean.DataBean) data;
 
         TextView name= (TextView) vh.getViewById(R.id.tv_room_list_name);
-        TextView owner= (TextView) vh.getViewById(R.id.tv_room_list_owner);
+        ImageView img_room_list= (ImageView) vh.getViewById(R.id.img_room_list);
 
         name.setText(bean.getName());
-        owner.setText(bean.getOwner());
+        Glide.with(context).load(bean.getIcon()).into(img_room_list);
     }
 }
